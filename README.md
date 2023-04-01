@@ -1,3 +1,3 @@
 
 
-My fist application (a todo list app using localStorage) usung Vue JS 3
+My fist application (a todo list app using localStorage) with Vue JS 3
