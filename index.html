@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Mon Todo App With Vue JS</title>
+	<link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+	<header>
+		
+	</header>
+	<div id="app" class="container">
+			<h1 class="title">{{ title }}</h1>
+			<div class="todo-add" >
+				<input v-if="todos.length > 0 " class="check-all" type="checkbox" @change="checkedAll" :checked=" remaining == 0" @click="checkAll">
+				<input class="todo" type="text" placeholder="Ajouter une tache" v-model="todo" @keyup.enter="add(todo)">
+				<button class="btn-add" @click="add(todo)">Ajouter</button>
+			</div>
+			<div class="filter-container">
+				<a :class="{ active: filterKey == 'all' }" class="filter" @click="filterKey = 'all' ">Tous</a>
+				<a :class="{ active: filterKey == 'active' }" class="filter" @click="filterKey = 'active' ">En cours</a>
+				<a :class="{ active: filterKey == 'completed' }" class="filter" @click="filterKey = 'completed' ">Terminer</a>
+			</div>	
+			<hr>
+			<ul v-if="filteredTodos.length > 0">
+				<li v-for="todo in filteredTodos">
+					<input type="checkbox" v-model="todo.completed">
+					<span class="todo-title">{{ todo.title }}<small v-if="todo.completed">√</small></span>
+					<a @click="remove(todo)">X</a>
+				</li>
+			</ul>
+			<p v-else class="empty">
+				<span >La liste est vide</span>
+			</p>
+			<hr> 
+			<div class="todo-footer">
+				<span v-if="todos.length > 0"class="remaining">{{ remaining }}<small> {{ remaining <= 1 ? ' tache restante' : ' taches restantes' }}</small></span>
+				<small v-if="clear > 0" class="clear" @click="clearCompletedTodos">Effacer taches terminer</small>
+			</div>
+	</div>
+
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
